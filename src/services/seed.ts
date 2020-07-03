@@ -29,7 +29,7 @@ export const seed = async (): Promise<void> => {
     }
   );
   const savedLeadDev = await leadDev.save();
-  await User.bulkCreate([
+  const users = await User.bulkCreate([
     { userName: "Architect Antal", lineManagerId: savedLeadDev.id },
     { userName: "FrontEnd Ferenc", lineManagerId: savedLeadDev.id },
     { userName: "BackendBéla", lineManagerId: savedLeadDev.id },
@@ -37,14 +37,33 @@ export const seed = async (): Promise<void> => {
   ]);
 
   const [cola, pepsi] = await Brand.bulkCreate([
-    { name: "Coca-cola" },
-    { name: "Pepsi" },
+    { name: "Coca-cola", createdById: users[0].id, modifiedById: users[2].id },
+    {
+      name: "Pepsi",
+      createdById: savedLeadDev.id,
+      modifiedById: savedLeadDev.id,
+    },
   ]);
 
   await Product.bulkCreate([
-    { name: "Coca-Cola Classic", brandId: cola.id },
-    { name: "Coca-Cola Zero", brandId: cola.id },
+    {
+      name: "Coca-Cola Classic",
+      brandId: cola.id,
+      createdById: users[1].id,
+      modifiedById: users[3].id,
+    },
+    {
+      name: "Coca-Cola Zero",
+      brandId: cola.id,
+      createdById: users[0].id,
+      modifiedById: users[2].id,
+    },
     { name: "Pepsi Lime", brandId: pepsi.id },
-    { name: "Pepsi Orange", brandId: pepsi.id },
+    {
+      name: "Pepsi Orange",
+      brandId: pepsi.id,
+      createdById: users[0].id,
+      modifiedById: users[3].id,
+    },
   ]);
 };
