@@ -20,7 +20,7 @@
   "homepage": "https://github.com/gallayl/sequelize-graphql-experiment#readme",
   "dependencies": {
     "apollo-server-express": "^2.15.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "graphql": "^15.2.0",
     "prettier": "^2.0.5",
     "sequelize": "^6.2.4",
